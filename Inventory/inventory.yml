@@ -1,0 +1,22 @@
+all:
+  hosts:
+    web01:
+      ansible_host: 172.31.25.211
+    web02:
+      ansible_host: 172.31.18.21
+    db01:
+      ansible_host: 172.31.22.217
+  childeren:
+    webservers:
+      hosts:
+      web01:
+      web02:
+    dbservers:
+      db01:
+    dcoregon:
+      childeren:
+        dbservers:
+        webservers:
+      vars:
+        ansible_user: ec2-user
+        ansible_ssh_private_key_file: clientkey.pem
