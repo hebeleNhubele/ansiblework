@@ -3,5 +3,4 @@
   hosts: ansible_host
   become: yes
   tasks:
-    -name:
-      ansible.builtin.command: reboot now
+    ansible.builtin.command: reboot now
