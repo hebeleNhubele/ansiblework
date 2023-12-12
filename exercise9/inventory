@@ -1,28 +1,43 @@
-[ansible_host]
-172.31.25.211
-172.31.18.21
-172.31.22.217
+all:
+  hosts:
+    web01:
+      ansible_host: 172.31.25.211
+    web02:
+      ansible_host: 172.31.18.21
+    db01:
+      ansible_host: 172.31.22.217
+    web03:
+      ansible_host: 172.31.19.156
+      ansible_user: ubuntu
 
-[ansible_host:vars]
-ansible_user: ec2-user
-; web01 ansible_host=172.31.25.211
-; web02 ansible_host=172.31.18.21
-; db01 ansible_host=172.31.22.217
-; web03 ansible_host=172.31.45.5 ansible_user=ubuntu
 
-[websrvgrp]
-172.31.19.156
+  children:
+    webservers:
+      hosts:
+        web01:
+        web02:
+        web03:
+    dbservers:
+      db01:
+    dc_oregon:
+      children:
+        webservers:
+        dbservers:
+      vars:
+        ansible_user: ec2-user
+        ansible_ssh_private_key_file=clientkey.pem  
+
 ; web01
-; web02
-; web03
+; ; web02
+; ; web03
 
-; [dbsrvgrp]
-; db01
+; ; [dbsrvgrp]
+; ; db01
 
-; [dc_ohio:children]
-; websrvgrp
-; dbsrvgrp
+; ; [dc_ohio:children]
+; ; websrvgrp
+; ; dbsrvgrp
 
-[websrvgrp:vars]
-ansible_user: ubuntu 
-; ansible_ssh_private_key_file=clientkey.pem
+; [websrvgrp:vars]
+; ansible_user: ubuntu 
+; ; 
