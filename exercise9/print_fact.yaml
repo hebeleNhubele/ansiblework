@@ -1,7 +1,7 @@
 ---
 - name: Learning fact variables
   hosts: all
-  vars:
+  #vars:
     #ansible_inventory_sources:
     # - inventory.ini
     #ansible_user: ec2-user
