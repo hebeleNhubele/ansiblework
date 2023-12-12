@@ -1,0 +1,7 @@
+---
+- name: reboot devices
+  hosts: ansible_host
+  become: yes
+  tasks:
+    -name:
+      ansible.builtin.command: reboot now
