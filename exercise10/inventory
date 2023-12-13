@@ -1,20 +1,70 @@
-web01 ansible_host=172.31.23.137 
-web02 ansible_host=172.31.17.193 
-db01 ansible_host=172.31.19.79 
-web03 ansible_host=172.31.34.221 ansible_user=ubuntu
+# web01 ansible_host=172.31.23.137 
+# web02 ansible_host=172.31.17.193 
+# db01 ansible_host=172.31.19.79 
+# web03 ansible_host=172.31.34.221 ansible_user=ubuntu
 
-[websrvgrp]
-web01
-web02
-web03
+# [websrvgrp]
+# web01
+# web02
+# web03
 
-[dbsrvgrp]
-db01
+# [dbsrvgrp]
+# db01
 
-[dc_ohio:children]
-websrvgrp
-dbsrvgrp
+# [dc_ohio:children]
+# websrvgrp
+# dbsrvgrp
 
-[dc_ohio:vars]
-ansible_user=centos
-ansible_ssh_private_key_file=vprofile-key.pem
+# [dc_ohio:vars]
+# ansible_user=centos
+# ansible_ssh_private_key_file=vprofile-key.pem
+
+
+
+
+all:
+  hosts:
+    web01:
+      ansible_host: 172.31.25.211
+    web02:
+      ansible_host: 172.31.18.21
+    db01:
+      ansible_host: 172.31.22.217
+    web03:
+      ansible_host: 172.31.19.156
+      ansible_user: ubuntu
+      ansible_ssh_private_key_file: clientkey.pem  
+
+
+  children:
+    webservers:
+      hosts:
+        web01:
+        web02:
+    dbservers:
+      hosts:
+        db01:
+      vars:
+        ansible_user: ec2-user
+        ansible_ssh_private_key_file: clientkey.pem  
+    dc_oregon:
+      children:
+        webservers:
+        dbservers:
+      vars:
+        ansible_user: ec2-user
+        ansible_ssh_private_key_file: clientkey.pem  
+
+#  web01
+#  web02
+#  web03
+#  [dbsrvgrp]
+#  db01
+
+#  [dc_ohio:children]
+#  websrvgrp
+#  dbsrvgrp
+
+#  [websrvgrp:vars]
+#  ansible_user: ubuntu 
+#  
