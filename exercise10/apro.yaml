@@ -9,14 +9,7 @@
         state: present
         update_cache: yes
       when: ansible_distribution == "Ubuntu"
-    
-    - name: Start Service on Ubuntu
-      service:
-        name: ntp
-        state: started
-        enabled: yes
-      when: ansible_distribution == "Ubuntu""
-    
+   
     - name: install ntp on centos
       yum:
         name: chrony
@@ -30,4 +23,9 @@
         enabled: yes
       when: ansible_distribution == "CentOS"
       
-    
+    - name: Start Service on Ubuntu
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu""   
