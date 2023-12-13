@@ -5,16 +5,30 @@
   tasks: 
     - name: Install ntp agent on Ubuntu 
       apt:
-        name: ntp
+        name: "{{item}}"
         state: present
         update_cache: yes
       when: ansible_distribution == "Ubuntu"
+      loop: 
+        - ntp
+        - wget
+        - gh
+        - git
+        - zip
+        - unzip
    
-    - name: install ntp on centos
+    - name: install chrony on centos
       yum:
-        name: chrony
+        name: "{{item}}"
         state: present
       when: ansible_distribution == "CentOS"
+            loop: 
+        - chrony
+        - wget
+        - gh
+        - git
+        - zip
+        - unzip
     
     - name: Start Service on centos
       service:
