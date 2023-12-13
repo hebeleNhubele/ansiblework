@@ -22,7 +22,7 @@
         name: "{{item}}"
         state: present
       when: ansible_distribution == "CentOS"
-            loop: 
+      loop: 
         - chrony
         - wget
         - gh
