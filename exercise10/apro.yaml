@@ -12,7 +12,6 @@
       loop: 
         - ntp
         - wget
-        - gh
         - git
         - zip
         - unzip
@@ -25,7 +24,6 @@
       loop: 
         - chrony
         - wget
-        - gh
         - git
         - zip
         - unzip
