@@ -3,24 +3,29 @@
   hosts: all
   become: yes
   tasks: 
-    - name: install ntp on centos
-      yum:
-        name: chrony
-        state: present
-      when: ansible_distribution == "CentOS"
     - name: Install ntp agent on Ubuntu 
       apt:
         name: ntp
         state: present
       when: ansible_distribution == "Ubuntu"
+    
+    - name: Start Service on Ubuntu
+      service: ntp
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu""
+    
+    - name: install ntp on centos
+      yum:
+        name: chrony
+        state: present
+      when: ansible_distribution == "CentOS"
+    
     - name: Start Service on centos
       service:
         name: chronyd
         state: started
         enabled: yes
       when: ansible_distribution = ="CentOS"
-    - name: Start Service on Ubuntu
-      service: ntp
-        state: started
-        enabled: yes
-      when: ansible_distribution == "Ubuntu""
+      
+    
