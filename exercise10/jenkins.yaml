@@ -1,0 +1,26 @@
+- hosts: web03
+  become: yes
+  tasks:
+    - name: Install Java
+      apt:
+        name: default-jre
+        state: present
+
+    - name: Add Jenkins repository key
+      apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins.io.key
+        state: present
+
+    - name: Add Jenkins repository
+      apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+
+    - name: Update apt and install Jenkins
+      apt:
+        name: jenkins
+        state: present
+        update_cache: yes
+
+    - name: Reboot the server
+      reboot:
