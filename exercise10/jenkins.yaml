@@ -1,4 +1,4 @@
-- hosts: web03
+- hosts: localhost
   become: yes
   tasks:
     - name: Install Java

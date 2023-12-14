@@ -1,63 +1,27 @@
-    1  clear
-    2  ansible --version
-    3  mkdir vprofile
-    4  cd vprofile/
-    5  ls
-    6  mkdir exercise1
-    7  ls
-    8  clear
-    9  cd
-   10  clear
-   11  cd vprofile/
-   12  ls
-   13  cd exercise1/
-   14  clear
-   15  sudo ls /etc/ansible/hosts 
-   16  vim inventory
-   17  clear
-   18  cd vprofile/exercise1/
-   19  vim vprofile-key.pem
-   20  ls -l
-   21  chmod 400 vprofile-key.pem 
-   22  vim inventory 
-   23  clear
-   24  ansible -i inventory -m ping web01
-   25  sudo vim /etc/ansible/ansible.cfg 
-   26  ansible -i inventory -m ping web01
-   27  ansible -i inventory -m ping web02
-   28  ansible -i inventory -m ping db01
-   29  clear
-   30  vim inventory 
-   31  ansible -i inventory -m ping websrvgrp
-   32  ansible -i inventory -m ping dbsrvgrp
-   33  ansible -i inventory -m ping dc_ohio
-   34  clear
-   35  ansible -i inventory -m ping all
-   36  ansible -i inventory -m ping '*'
-   37  clear
-   38  vim inventory 
-   39  ansible -i inventory -m ping '*'
-   40  cat inventory 
-   41  clear
-   42  cd ..
-   43  cp -r exercise1/ exercise2
-   44  cd exercise2/
-   45  ansible -i inventory -m ping all
-   46  clear
-   47  ansible -i inventory -m yum -a "name=httpd state=present" web01
-   48  tail -5 inventory 
-   49  ansible -i inventory -m yum -a "name=httpd state=present" web01 --become
-   50  clear
-   51  ansible -i inventory -m yum -a "name=httpd state=present" web01 --become
-   52  clear
-   53  ansible -i inventory -m service -a "name=httpd state=started enabled=yes" web01 --become
-   54  clear
-   55  ansible -i inventory -m service -a "name=httpd state=started enabled=yes" web01 --become
-   56  clear
-   57  vim index.html
-   58  ansible -i inventory -m copy -a "src=index.html dest=/var/www/html/index.html" web01 --become
-   59  vim index.html 
-   60  ansible -i inventory -m copy -a "src=index.html dest=/var/www/html/index.html" web01 --become
-   61  ls
-   62  cd ..
-   63  history > history.txt
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAuHuabmUZlwUo4huP2Hfbo775aR+oVfnta39YDNZnId2L0DKg
+hiVNHhzaIoQ7dST7+NYDRrpn6HlWUJWJtDwHF7f3TW0CM/lErBZusYtD2fMhWcj+
+s/1230q1XIlesP5IyZNdSzW1I5QO7qcv1oCH469OvhmKhXmemxER1BdV1BizTg5v
+CYL5sJo7LbdW42iTkWwXmsj4teKMJLSgW0HPDkTjQSR/LZVGUz4EYiRQ1e0SQSDZ
+JDiUrFg9uAkvP9DAvrY72pyzyGQ2CASNece7n0LyWPhc1eVTUlrqh5h+K1DkBycb
+FejQj25WnbHcPpnjNmcnym7dcRArIE1JRGJRbQIDAQABAoIBAAn5LK0hLBP9BGvM
+36btO+OLVIJ5YqlbPJmeJc1z3dl317ImuoTmCVhCaQyKp4g6uqCGOWEefLWVsbPj
+kbE7uYpvuJ/n78GNjUfcYpmYlM94lGn9Mr/aSQ3jRRC+oG7jIF49aELDoYpN28zN
+HwnyouYNOS2PxexXWdq6PoN/y3UO1UPRSOFi/oHux1TWM8TpG620KrrXX5HcKr/o
+HQ10t/uUsrMFmYTGQsyx5LZyzsW0pdK3lmXt3kLmP3tGH9zkYKSa5cv/e9up3yaR
+SVqxCpT0hR5UUKwxTPzoPQKbsm0QdwMFYI1AFfpJZc95/Z1c/63DyCvMc1zZXYIv
+507Uf0UCgYEA5IDH1NfX+CJ39k6JfVsIm61UxMdTla9hIvS3a6ZbtFpqmWwJDxfE
+MJWOPSZbYwzsjxcglJ0K1AIf56vYdYxLZzIoGYHUqHDfh3lUadftQJyUOCHln5bL
+wNU35/dTgFCsJR4ogH1xbN+5InPWR99gUP/sJZoXfH5XLMUHFLcRPJ8CgYEAzq6+
+kVSTh+IAXL5osaPEuMDp/Px99JpJS/21mp4VLtcQYyRZd0igxunt0OQaDjDNY8dq
+VHWHes+chsg6CVNCeaGv2SjtoJxAoYUL6KxyRNHCKKHDQijGZLx8+UD0Wjah2ZwD
+w87UE4dKQlWoohMrC3lbARAkkllYN9TsET0OKnMCgYAfqJgHLUCG6H+maIs0CwDO
+UN2FxfgWrQ3QQgeHqqzZ+Az85LL8nFZaRN5IKqBOwOOlj5a8AGYXqZOyDWUYJC/u
+REy5+/ryu3C83FqNr5T3droybL/btJDWTrRIN0QiawruuZby9m5Yn0aPN21g19oI
+Xuzg6NCINxjs4v9wJ00EEQKBgQCUYwkWti4lhLDV5S6tOvLl4jscEvsrPgoZsNFN
+bOmwc1+kjlhdN5uWtCS1sM60GX2cgXNpp+fY2G18pwxj3Y8AXIEv3B6fDQ+p5yeh
+qQ1xM1e+bEUPns6xTFI9cdD9Y/PXlBdv4XKJgrxh27XyhuiEmGAp5zkaiWK40vmZ
+dshQ2QKBgQCwTUXlwGLVPPZQ3GJkR3xEjDX9yuq5UkZ91GXxhMoQc5p2joWSDMnf
+MKa0fsKosJTe9EiBn2bM8vpQLTuqXynuoTaltPSmZI2e945mnSsecz3Mq1hCksLO
+4X1jF96Npqh+IVAU65Ae3GTdFE+DLhyIJEglApy1ERF9PcAIk4rkbQ==
+-----END RSA PRIVATE KEY-----

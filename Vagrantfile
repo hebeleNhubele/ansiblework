@@ -1,30 +1,27 @@
-Vagrant.configure("2") do |config|
-
-  config.vm.define "scriptbox" do |scriptbox|
-    scriptbox.vm.box = "centos/7"
-	scriptbox.vm.hostname = "scriptbox"
-	scriptbox.vm.network "private_network", ip: "192.168.33.2"
-  scriptbox.vm.network "public_network"
-  end
-
-    config.vm.define "web01" do |web01|
-    web01.vm.box = "centos/7"
-	web01.vm.hostname = "web01"
-	web01.vm.network "private_network", ip: "192.168.33.3"
-    web01.vm.network "public_network"
-    end
-  
-  config.vm.define "web02" do |web02|
-    web02.vm.box = "centos/7"
-	web02.vm.hostname = "web02"
-	web02.vm.network "private_network", ip: "192.168.33.4"
-	web02.vm.network "public_network"
-  end
-  
-  config.vm.define "web03" do |web03|
-    web03.vm.box = "ubuntu/xenial64"
-	web03.vm.hostname = "web03"
-	web03.vm.network "private_network", ip: "192.168.33.5"
-	web03.vm.network "public_network"
-  end
-end
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEAuHuabmUZlwUo4huP2Hfbo775aR+oVfnta39YDNZnId2L0DKg
+hiVNHhzaIoQ7dST7+NYDRrpn6HlWUJWJtDwHF7f3TW0CM/lErBZusYtD2fMhWcj+
+s/1230q1XIlesP5IyZNdSzW1I5QO7qcv1oCH469OvhmKhXmemxER1BdV1BizTg5v
+CYL5sJo7LbdW42iTkWwXmsj4teKMJLSgW0HPDkTjQSR/LZVGUz4EYiRQ1e0SQSDZ
+JDiUrFg9uAkvP9DAvrY72pyzyGQ2CASNece7n0LyWPhc1eVTUlrqh5h+K1DkBycb
+FejQj25WnbHcPpnjNmcnym7dcRArIE1JRGJRbQIDAQABAoIBAAn5LK0hLBP9BGvM
+36btO+OLVIJ5YqlbPJmeJc1z3dl317ImuoTmCVhCaQyKp4g6uqCGOWEefLWVsbPj
+kbE7uYpvuJ/n78GNjUfcYpmYlM94lGn9Mr/aSQ3jRRC+oG7jIF49aELDoYpN28zN
+HwnyouYNOS2PxexXWdq6PoN/y3UO1UPRSOFi/oHux1TWM8TpG620KrrXX5HcKr/o
+HQ10t/uUsrMFmYTGQsyx5LZyzsW0pdK3lmXt3kLmP3tGH9zkYKSa5cv/e9up3yaR
+SVqxCpT0hR5UUKwxTPzoPQKbsm0QdwMFYI1AFfpJZc95/Z1c/63DyCvMc1zZXYIv
+507Uf0UCgYEA5IDH1NfX+CJ39k6JfVsIm61UxMdTla9hIvS3a6ZbtFpqmWwJDxfE
+MJWOPSZbYwzsjxcglJ0K1AIf56vYdYxLZzIoGYHUqHDfh3lUadftQJyUOCHln5bL
+wNU35/dTgFCsJR4ogH1xbN+5InPWR99gUP/sJZoXfH5XLMUHFLcRPJ8CgYEAzq6+
+kVSTh+IAXL5osaPEuMDp/Px99JpJS/21mp4VLtcQYyRZd0igxunt0OQaDjDNY8dq
+VHWHes+chsg6CVNCeaGv2SjtoJxAoYUL6KxyRNHCKKHDQijGZLx8+UD0Wjah2ZwD
+w87UE4dKQlWoohMrC3lbARAkkllYN9TsET0OKnMCgYAfqJgHLUCG6H+maIs0CwDO
+UN2FxfgWrQ3QQgeHqqzZ+Az85LL8nFZaRN5IKqBOwOOlj5a8AGYXqZOyDWUYJC/u
+REy5+/ryu3C83FqNr5T3droybL/btJDWTrRIN0QiawruuZby9m5Yn0aPN21g19oI
+Xuzg6NCINxjs4v9wJ00EEQKBgQCUYwkWti4lhLDV5S6tOvLl4jscEvsrPgoZsNFN
+bOmwc1+kjlhdN5uWtCS1sM60GX2cgXNpp+fY2G18pwxj3Y8AXIEv3B6fDQ+p5yeh
+qQ1xM1e+bEUPns6xTFI9cdD9Y/PXlBdv4XKJgrxh27XyhuiEmGAp5zkaiWK40vmZ
+dshQ2QKBgQCwTUXlwGLVPPZQ3GJkR3xEjDX9yuq5UkZ91GXxhMoQc5p2joWSDMnf
+MKa0fsKosJTe9EiBn2bM8vpQLTuqXynuoTaltPSmZI2e945mnSsecz3Mq1hCksLO
+4X1jF96Npqh+IVAU65Ae3GTdFE+DLhyIJEglApy1ERF9PcAIk4rkbQ==
+-----END RSA PRIVATE KEY-----
