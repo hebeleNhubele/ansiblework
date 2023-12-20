@@ -15,7 +15,7 @@
         - git
         - zip
         - unzip
-        - Openjdk17
+        - openjdk-17-jdk
    
     - name: install chrony on centos
       yum:
