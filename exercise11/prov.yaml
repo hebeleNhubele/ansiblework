@@ -47,3 +47,35 @@
       copy:
         content: "This {{ansible_distribution}} is Managed by Ansible.\n"
         dest: /etc/motd
+
+    - name: Deploy NTP conf file for Ubuntu
+      template:
+         src: templates/ntpcon_ubuntu
+         dest: /etc/ntp.conf
+      when: ansible_os_family == "Ubuntu"
+
+    - name: Deploy chrony conf file for Centos
+      template:
+         src: templates/ntp_debian.conf.j2
+         dest: /etc/chrony.conf
+      when: ansible_os_family == "CentOS"
+
+    # - name: Dir for dev data
+    #   file:
+    #     path: /opt/devdata
+    #     state: directory
+    #     mode: 0775
+
+    - name: Restart NTP on Ubuntu
+      service:
+        name: ntpd
+        state: restarted
+        enabled: yes
+      when: ansible_os_family == "Ubuntu"
+
+    - name: Restart NTP on Centos
+      service:
+         name: chronyd
+         state: restarted
+         enabled: yes
+      when: ansible_os_family == "CentOS"
