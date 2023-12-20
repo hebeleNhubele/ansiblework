@@ -56,7 +56,7 @@
 
     - name: Deploy chrony conf file for Centos
       template:
-         src: templates/ntp_debian.conf.j2
+         src: templates/ntpconf_centos
          dest: /etc/chrony.conf
       when: ansible_os_family == "CentOS"
 
