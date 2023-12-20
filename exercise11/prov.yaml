@@ -1,0 +1,49 @@
+---
+- name: Provisioning Servers by anbar
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Install ntp agent on Ubuntu 
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+      loop: 
+        - ntp
+        - wget
+        - git
+        - zip
+        - unzip
+        - Openjdk17
+   
+    - name: install chrony on centos
+      yum:
+        name: "{{item}}"
+        state: present
+      when: ansible_distribution == "CentOS"
+      loop: 
+        - chrony
+        - wget
+        - git
+        - zip
+        - unzip
+    
+    - name: Start Service on centos
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+      
+    - name: Start Service on Ubuntu
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
+    
+    - name: Banner file /etc/motd
+      copy:
+        content: "This {{ansible_distribution}} is Managed by Ansible.\n"
+        dest: /etc/motd
