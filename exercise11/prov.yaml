@@ -59,12 +59,17 @@
          src: templates/ntpconf_centos
          dest: /etc/chrony.conf
       when: ansible_distribution == "CentOS"
+    - name: fetch list of your_username
+      command: getent passwd
+      register: existing_users
 
     - name: Dir for dev data
       file:
-        path: "{{webserver_user_registered.home}}/testfolder"
+        path: "/home/{{item.split(':')[0]}}/testfolder"
         state: directory
         mode: 0775
+      loop: "{{existing_users.stdout_lines}}"
+      when: item.split(':')[2] | int >= 1000
 
     - name: Restart NTP on Ubuntu
       service:
