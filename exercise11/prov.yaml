@@ -60,11 +60,11 @@
          dest: /etc/chrony.conf
       when: ansible_distribution == "CentOS"
 
-    # - name: Dir for dev data
-    #   file:
-    #     path: /opt/devdata
-    #     state: directory
-    #     mode: 0775
+    - name: Dir for dev data
+      file:
+        path: "{{/webserver_user_registered.home}}/.wp-cli"
+        state: directory
+        mode: 0775
 
     - name: Restart NTP on Ubuntu
       service:
