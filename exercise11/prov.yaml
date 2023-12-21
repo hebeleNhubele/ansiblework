@@ -52,13 +52,13 @@
       template:
          src: templates/ntpcon_ubuntu
          dest: /etc/ntp.conf
-      when: ansible_os_family == "Ubuntu"
+      when: ansible_distribution == "Ubuntu"
 
     - name: Deploy chrony conf file for Centos
       template:
          src: templates/ntpconf_centos
          dest: /etc/chrony.conf
-      when: ansible_os_family == "CentOS"
+      when: ansible_distribution == "CentOS"
 
     # - name: Dir for dev data
     #   file:
@@ -71,11 +71,11 @@
         name: ntpd
         state: restarted
         enabled: yes
-      when: ansible_os_family == "Ubuntu"
+      when: ansible_distribution == "Ubuntu"
 
     - name: Restart NTP on Centos
       service:
          name: chronyd
          state: restarted
          enabled: yes
-      when: ansible_os_family == "CentOS"
+      when: ansible_distribution == "CentOS"
