@@ -62,7 +62,7 @@
 
     - name: Dir for dev data
       file:
-        path: "{{/webserver_user_registered.home}}/.wp-cli"
+        path: "{{/webserver_user_registered.home}}/testfolder"
         state: directory
         mode: 0775
 
