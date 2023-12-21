@@ -43,10 +43,10 @@
     #     enabled: yes
     #   when: ansible_distribution == "Ubuntu"
     
-    # - name: Banner file /etc/motd
-    #   copy:
-    #     content: "This {{ansible_distribution}} is Managed by Ansible.\n"
-    #     dest: /etc/motd
+    - name: Banner file /etc/motd
+      copy:
+        content: "This {{ansible_os_family}} is Managed by Ansible.\n"
+        dest: /etc/motd
 
     - name: Deploy NTP conf file for Ubuntu
       template:
