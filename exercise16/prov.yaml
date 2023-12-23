@@ -27,6 +27,11 @@
       notify:
         - Restart NTP on Centos
         - fetch list of your_username
+
+    - name: Dump file
+      copy:
+        file: files/myfile.txt
+        dest: /tmp/myfile.txt
   
   handlers:
     - name: Restart NTP on Ubuntu
