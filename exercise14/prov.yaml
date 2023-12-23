@@ -60,17 +60,19 @@
       template:
          src: templates/ntpcon_ubuntu
          dest: /etc/ntp.conf
+         backup: yes
       when: ansible_distribution == "Ubuntu"
       notify:
-        - reStart Service on Ubuntu
+        - Restart NTP on Ubuntu
 
     - name: Deploy chrony conf file for Centos
       template:
          src: templates/ntpconf_centos
          dest: /etc/chrony.conf
+         backup: yes
       when: ansible_distribution == "CentOS"
       notify:
-        - reStart Service on Centos
+        - Restart NTP on Centos
 
     - name: fetch list of your_username
       command: getent passwd
