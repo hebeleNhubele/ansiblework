@@ -27,10 +27,6 @@
       notify:
         - Restart NTP on Centos
         - fetch list of your_username
-
-    - name: fetch list of your_username
-      command: getent passwd
-      register: existing_users
   
   handlers:
     - name: Restart NTP on Ubuntu
@@ -46,3 +42,7 @@
          state: restarted
          enabled: yes
       when: ansible_distribution == "CentOS"
+
+    - name: fetch list of your_username
+      command: getent passwd
+      register: existing_users
