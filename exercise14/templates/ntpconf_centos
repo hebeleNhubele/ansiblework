@@ -4,7 +4,7 @@ pool {{ntp0}} iburst
 pool {{ntp1}} iburst
 pool {{ntp2}} iburst
 pool {{ntp3}} iburst
-
+##
 # Use NTP servers from DHCP.
 sourcedir /run/chrony-dhcp
 
