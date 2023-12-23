@@ -51,7 +51,7 @@
 
 - name: Deploy NTP conf file for Ubuntu
   template:
-     src: templates/ntpcon_ubuntu
+     src: ntpcon_ubuntu.j2
      dest: /etc/ntp.conf
      backup: yes
   when: ansible_distribution == "Ubuntu"
@@ -61,7 +61,7 @@
 
 - name: Deploy chrony conf file for Centos
   template:
-     src: templates/ntpconf_centos
+     src: ntpconf_centos.j2
      dest: /etc/chrony.conf
      backup: yes
   when: ansible_distribution == "CentOS"
@@ -71,5 +71,5 @@
 
 - name: Dump file
   copy:
-    src: files/myfile.txt
+    src: myfile.txt
     dest: /tmp/myfile.txt
