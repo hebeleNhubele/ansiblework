@@ -48,29 +48,35 @@
         content: "This {{ansible_os_family}} is Managed by Ansible.\n"
         dest: /etc/motd
 
+    # - name: Dir for dev data
+    #   file:
+    #     path: "/home/{{item.split(':')[0]}}/testfolder"
+    #     state: directory
+    #     mode: 0775
+    #   loop: "{{existing_users.stdout_lines}}"
+    #   when: item.split(':')[2] | int >= 1000
+
     - name: Deploy NTP conf file for Ubuntu
       template:
          src: templates/ntpcon_ubuntu
          dest: /etc/ntp.conf
       when: ansible_distribution == "Ubuntu"
+      notify:
+        - reStart Service on Ubuntu
 
     - name: Deploy chrony conf file for Centos
       template:
          src: templates/ntpconf_centos
          dest: /etc/chrony.conf
       when: ansible_distribution == "CentOS"
+      notify:
+        - reStart Service on Centos
+
     - name: fetch list of your_username
       command: getent passwd
       register: existing_users
-
-    - name: Dir for dev data
-      file:
-        path: "/home/{{item.split(':')[0]}}/testfolder"
-        state: directory
-        mode: 0775
-      loop: "{{existing_users.stdout_lines}}"
-      when: item.split(':')[2] | int >= 1000
-
+  
+  handlers:
     - name: Restart NTP on Ubuntu
       service:
         name: ntp
