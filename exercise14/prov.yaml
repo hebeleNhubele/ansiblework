@@ -16,6 +16,7 @@
       when: ansible_distribution == "Ubuntu"
       notify:
         - Restart NTP on Ubuntu
+        - fetch list of your_username
 
     - name: Deploy chrony conf file for Centos
       template:
@@ -25,10 +26,11 @@
       when: ansible_distribution == "CentOS"
       notify:
         - Restart NTP on Centos
+        - fetch list of your_username
 
-    # - name: fetch list of your_username
-    #   command: getent passwd
-    #   register: existing_users
+    - name: fetch list of your_username
+      command: getent passwd
+      register: existing_users
   
   handlers:
     - name: Restart NTP on Ubuntu
