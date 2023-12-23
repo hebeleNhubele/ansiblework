@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars:
-    dir1: /opt/dir22
+    mydir: /opt/dir22
   tasks: 
     - name: Banner file /etc/motd
       copy:
