@@ -1,2 +1,75 @@
 ---
 # tasks file for post-install
+    - name: Banner file /etc/motd
+      copy:
+        content: "This {{ansible_os_family}} is Managed by Ansible.\n"
+        dest: /etc/motd
+    - name: Create a folder
+      file:
+        path: "{{mydir}}"
+        state: directory
+
+    - name: Install ntp agent on Ubuntu 
+      apt:
+        name: "{{item}}"
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+      loop: 
+        - ntp
+        - wget
+        - git
+        - zip
+        - unzip
+        - openjdk-17-jdk
+   
+    - name: install chrony on centos
+      yum:
+        name: "{{item}}"
+        state: present
+      when: ansible_distribution == "CentOS"
+      loop: 
+        - chrony
+        - wget
+        - git
+        - zip
+        - unzip
+    
+    - name: Start Service on centos
+      service:
+        name: chronyd
+        state: started
+        enabled: yes
+      when: ansible_distribution == "CentOS"
+      
+    - name: Start Service on Ubuntu
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Deploy NTP conf file for Ubuntu
+      template:
+         src: templates/ntpcon_ubuntu
+         dest: /etc/ntp.conf
+         backup: yes
+      when: ansible_distribution == "Ubuntu"
+      notify:
+        - Restart NTP on Ubuntu
+        - fetch list of your_username
+
+    - name: Deploy chrony conf file for Centos
+      template:
+         src: templates/ntpconf_centos
+         dest: /etc/chrony.conf
+         backup: yes
+      when: ansible_distribution == "CentOS"
+      notify:
+        - Restart NTP on Centos
+        - fetch list of your_username
+
+    - name: Dump file
+      copy:
+        src: files/myfile.txt
+        dest: /tmp/myfile.txt
