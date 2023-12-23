@@ -3,58 +3,10 @@
   hosts: all
   become: yes
   tasks: 
-    # - name: Install ntp agent on Ubuntu 
-    #   apt:
-    #     name: "{{item}}"
-    #     state: present
-    #     update_cache: yes
-    #   when: ansible_distribution == "Ubuntu"
-    #   loop: 
-    #     - ntp
-    #     - wget
-    #     - git
-    #     - zip
-    #     - unzip
-    #     - openjdk-17-jdk
-   
-    # - name: install chrony on centos
-    #   yum:
-    #     name: "{{item}}"
-    #     state: present
-    #   when: ansible_distribution == "CentOS"
-    #   loop: 
-    #     - chrony
-    #     - wget
-    #     - git
-    #     - zip
-    #     - unzip
-    
-    # - name: Start Service on centos
-    #   service:
-    #     name: chronyd
-    #     state: started
-    #     enabled: yes
-    #   when: ansible_distribution == "CentOS"
-      
-    # - name: Start Service on Ubuntu
-    #   service:
-    #     name: ntp
-    #     state: started
-    #     enabled: yes
-    #   when: ansible_distribution == "Ubuntu"
-    
     - name: Banner file /etc/motd
       copy:
         content: "This {{ansible_os_family}} is Managed by Ansible.\n"
         dest: /etc/motd
-
-    # - name: Dir for dev data
-    #   file:
-    #     path: "/home/{{item.split(':')[0]}}/testfolder"
-    #     state: directory
-    #     mode: 0775
-    #   loop: "{{existing_users.stdout_lines}}"
-    #   when: item.split(':')[2] | int >= 1000
 
     - name: Deploy NTP conf file for Ubuntu
       template:
