@@ -76,7 +76,7 @@
 
     - name: Dump file
       copy:
-        file: files/myfile.txt
+        src: files/myfile.txt
         dest: /tmp/myfile.txt
   
   handlers:
