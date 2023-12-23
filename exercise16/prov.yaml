@@ -1,0 +1,48 @@
+---
+- name: Provisioning Servers by anbar
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Banner file /etc/motd
+      copy:
+        content: "This {{ansible_os_family}} is Managed by Ansible.\n"
+        dest: /etc/motd
+
+    - name: Deploy NTP conf file for Ubuntu
+      template:
+         src: templates/ntpcon_ubuntu
+         dest: /etc/ntp.conf
+         backup: yes
+      when: ansible_distribution == "Ubuntu"
+      notify:
+        - Restart NTP on Ubuntu
+        - fetch list of your_username
+
+    - name: Deploy chrony conf file for Centos
+      template:
+         src: templates/ntpconf_centos
+         dest: /etc/chrony.conf
+         backup: yes
+      when: ansible_distribution == "CentOS"
+      notify:
+        - Restart NTP on Centos
+        - fetch list of your_username
+  
+  handlers:
+    - name: Restart NTP on Ubuntu
+      service:
+        name: ntp
+        state: restarted
+        enabled: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Restart NTP on Centos
+      service:
+         name: chronyd
+         state: restarted
+         enabled: yes
+      when: ansible_distribution == "CentOS"
+
+    - name: fetch list of your_username
+      command: getent passwd
+      register: existing_users
