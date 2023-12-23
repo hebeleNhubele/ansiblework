@@ -26,9 +26,9 @@
       notify:
         - Restart NTP on Centos
 
-    - name: fetch list of your_username
-      command: getent passwd
-      register: existing_users
+    # - name: fetch list of your_username
+    #   command: getent passwd
+    #   register: existing_users
   
   handlers:
     - name: Restart NTP on Ubuntu
