@@ -3,4 +3,10 @@
   hosts: all
   become: yes
   roles:
-    -  post-install
+    - roles: -  post-install
+      vars:
+        ntp0: 2.ee.pool.ntp.org
+        ntp1: 1.in.pool.ntp.org
+        ntp2: 2.in.pool.ntp.org
+        ntp3: 3.north-america.pool.ntp.org
+
