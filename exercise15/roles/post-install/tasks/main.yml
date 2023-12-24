@@ -1,105 +1,75 @@
 ---
 # tasks file for post-install
-- name: Install NTP on Centos
+- name: Banner file /etc/motd
+  copy:
+    content: "This {{ansible_os_family}} is Managed by Ansible.\n"
+    dest: /etc/motd
+- name: Create a folder
+  file:
+    path: "{{mydir}}"
+    state: directory
+
+- name: Install ntp agent on Ubuntu 
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+  loop: 
+    - ntp
+    - wget
+    - git
+    - zip
+    - unzip
+    - openjdk-17-jdk
+   
+- name: install chrony on centos
   yum:
     name: "{{item}}"
     state: present
   when: ansible_distribution == "CentOS"
-  loop:
-    - ntp
+  loop: 
+    - chrony
     - wget
     - git
     - zip
     - unzip
-  tags:
-    - packages
 
-- name: Install NTP on Ubuntu
-  apt:
-     name: "{{item}}"
-     state: present
-     update_cache: yes
-  when: ansible_distribution == "Ubuntu"
-  loop:
-    - ntp
-    - wget
-    - git
-    - zip
-    - unzip
-  tags:
-    - packages
-
-- name: Start & enable NTP on Redhat
+- name: Start Service on centos
   service:
-    name: ntpd
+    name: chronyd
     state: started
     enabled: yes
-  when: ansible_os_family == "RedHat"
-  tags:
-    - services
-
-- name: Start & enable NTP on Debian
+  when: ansible_distribution == "CentOS"
+  
+- name: Start Service on Ubuntu
   service:
     name: ntp
     state: started
     enabled: yes
-  when: ansible_os_family == "Debian"
-  tags:
-    - services
+  when: ansible_distribution == "Ubuntu"
 
-- name: Add group
-  group:
-     name: devops
-     state: present
-  tags:
-    - system
-
-- name: Add users
-  user:
-      name: "{{item}}"
-      state: present
-      groups: devops
-  loop: "{{usernames}}"
-  tags:
-    - system
-
-- name: Banner file /etc/motd
-  copy:
-    content: "This {{ansible_distribution}} is Managed by Ansible.\n"
-    dest: /etc/motd
-  tags:
-    - system
-
-- name: Deploy NTP conf file for RedHat
+- name: Deploy NTP conf file for Ubuntu
   template:
-     src: ntp_redhat.conf.j2
-     dest: "{{ntp_path}}"
-  when: ansible_os_family == "RedHat"
+     src: ntpcon_ubuntu.j2
+     dest: /etc/ntp.conf
+     backup: yes
+  when: ansible_distribution == "Ubuntu"
   notify:
-    - Restart NTP on Redhat
-  tags:
-    - conf
+    - Restart NTP on Ubuntu
+    - fetch list of your_username
 
-- name: Deploy NTP conf file for Debian
+- name: Deploy chrony conf file for Centos
   template:
-     src: ntp_debian.conf.j2
-     dest: "{{ntp_path}}"
-  when: ansible_os_family == "Debian"
+     src: ntpconf_centos.j2
+     dest: /etc/chrony.conf
+     backup: yes
+  when: ansible_distribution == "CentOS"
   notify:
-    - Restart NTP on Debian
-  tags:
-    - conf
+    - Restart NTP on Centos
+    - fetch list of your_username
 
-- name: Dir for dev data
-  file:
-    path: /opt/devdata
-    state: directory
-    mode: 0775
-  tags:
-    - system
-
-- name: Deploy dev data file
+- name: Dump file
   copy:
-    src: dev.txt
-    dest: /opt/devdata/dev.txt
-
+    src: myfile.txt
+    dest: /tmp/myfile.txt
