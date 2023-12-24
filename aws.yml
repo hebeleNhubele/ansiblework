@@ -19,3 +19,17 @@
         dest: ./sample.pem
       when: keyout.changed
 
+    - name: start an instance
+      amazon.aws.ec2_instance:
+        name: "public-compute-instance"
+        key_name: "sample"
+        #vpc_subnet_id: subnet-5ca1ab1e
+        instance_type: t2.micro
+        security_group: default
+        #network:
+           # assign_public_ip: true
+        image_id: ami-079db87dc4c10ac91
+        exact_count: 1
+        region: us-east-1
+        tags:
+          Environment: Testing
