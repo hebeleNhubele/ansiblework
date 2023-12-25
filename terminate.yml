@@ -1,7 +1,7 @@
 ---
 
-#- name: Terminate EC2 Instance
-- hosts: localhost
+- name: Terminate EC2 Instance
+  hosts: localhost
   connection: local
   gather_facts: False
 
@@ -9,13 +9,13 @@
     instance_id: i-02f97e70735b5f501
     region: us-east-1
        
-    tasks:
-      - name: Terminate EC2 Instance
-        ec2:
-          instance_ids: "{{ instance_id }}"
-          state: "absent"
-          region: "{{ region }}"
-        register: ec2_termination
+  tasks:
+    - name: Terminate EC2 Instance
+      ec2:
+        instance_ids: "{{ instance_id }}"
+        state: "absent"
+        region: "{{ region }}"
+      register: ec2_termination
 
-      - debug:
-          var: ec2_termination
+    - debug:
+        var: ec2_termination
