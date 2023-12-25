@@ -1,7 +1,7 @@
 ---
 
-- name: Terminate EC2 Instance
-  hosts: localhost
+#- name: Terminate EC2 Instance
+- hosts: localhost
   connection: local
   gather_facts: False
 
