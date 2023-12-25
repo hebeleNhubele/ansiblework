@@ -1,0 +1,12 @@
+- name: Terminate instances
+  hosts: localhost
+  tasks:
+    - name: Terminate instances that were previously launched
+      ec2_instance:
+        state: 'absent'
+        region: us-east-1
+        instance_ids: 'i-02f97e70735b5f501'
+      register: ec2_termination
+
+    - debug:
+        var: ec2_termination
