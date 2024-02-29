@@ -4,7 +4,8 @@
   become: yes
   vars:
     ansible_connection: ssh
-    ansible_ssh_pass: vagrant
+    ansible_ssh_user: ansible
+    ansible_ssh_pass: password
     # Uncomment the line below to disable host key checking
     #host_key_checking: False
   tasks:
