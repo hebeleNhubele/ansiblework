@@ -1,0 +1,11 @@
+---
+- name: first yaml
+  host: inventory
+  become: yes
+  vars:
+    ansible_connection: ssh
+    ansible_ssh_pass: vagrant
+    host_key_checking: False
+  tasks:
+    -name: Restart_Devices
+      ansible.builtin.shell: reboot now
