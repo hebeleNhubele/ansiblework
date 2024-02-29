@@ -1,11 +1,17 @@
 ---
 - name: first yaml
-  host: inventory
+  hosts: all
   become: yes
   vars:
     ansible_connection: ssh
     ansible_ssh_pass: vagrant
-    host_key_checking: False
+    # Uncomment the line below to disable host key checking
+    #host_key_checking: False
   tasks:
-    -name: Restart_Devices
+    - name: Gather host keys and add to known_hosts
+      ansible.builtin.shell: ssh-keyscan -H {{ inventory_hostname }} >> ~/.ssh/known_hosts
+      delegate_to: localhost
+      changed_when: false
+
+    - name: Restart_Devices
       ansible.builtin.shell: reboot now
