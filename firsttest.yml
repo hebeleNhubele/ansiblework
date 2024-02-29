@@ -2,6 +2,8 @@
 - name: first yaml
   hosts: all
   become: yes
+  become_method: su
+  become_user: root
   vars:
     ansible_connection: ssh
     ansible_ssh_user: ansible
@@ -12,6 +14,6 @@
   tasks:
     - name: Restart_Devices
       ansible.builtin.shell: reboot now
-      become_method: sudo
-      vars:
-        ansible_become_password: password
+      # become_method: sudo
+      # vars:
+      #   ansible_become_password: password
