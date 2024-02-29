@@ -12,3 +12,6 @@
   tasks:
     - name: Restart_Devices
       ansible.builtin.shell: reboot now
+      become_method: sudo
+      vars:
+        ansible_become_password: password
