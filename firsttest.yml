@@ -1,19 +1,32 @@
 ---
-- name: first yaml
+- name: Reboot all hosts
   hosts: all
   become: yes
-  become_method: su
-  become_user: root
   vars:
     ansible_connection: ssh
     ansible_ssh_user: ansible
     ansible_ssh_pass: password
-    # Uncomment the line below to disable host key checking
-    host_key_checking: False
 
   tasks:
-    - name: Restart_Devices
+    - name: Restart devices
       ansible.builtin.shell: reboot now
-      # become_method: sudo
-      # vars:
-      #   ansible_become_password: password
+
+# ---
+# - name: first yaml
+#   hosts: all
+#   become: yes
+#   become_method: su
+#   become_user: root
+#   vars:
+#     ansible_connection: ssh
+#     ansible_ssh_user: ansible
+#     ansible_ssh_pass: password
+#     # Uncomment the line below to disable host key checking
+#     host_key_checking: False
+
+#   tasks:
+#     - name: Restart_Devices
+#       ansible.builtin.shell: reboot now
+#       # become_method: sudo
+#       # vars:
+#       #   ansible_become_password: password
