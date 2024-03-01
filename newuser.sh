@@ -8,7 +8,7 @@ fi
 
 # Define variables
 NEW_USER="mezdap"
-PASSWORD="your_password_here"
+PASSWORD="mezdap"
 
 # Add user
 useradd -m "$NEW_USER"
