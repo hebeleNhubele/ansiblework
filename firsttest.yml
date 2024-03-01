@@ -12,7 +12,7 @@
     host_key_checking: False
   tasks:
     - name: Restart_Devices
-      ansible.builtin.shell: sudo reboot now
+      ansible.builtin.shell: sudo shutdown now
       become_method: sudo
       vars:
         ansible_become_password: mezdap
